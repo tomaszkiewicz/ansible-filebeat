@@ -42,9 +42,14 @@
 - name: flush handlers to prevent start then restart
   meta: flush_handlers
 
+- name: check if systemd present
+  stat:
+    path: /bin/systemctl
+  register: stat_result
+
 - name: reload systemd daemon
   shell: "systemctl daemon-reload"
-  when: ansible_service_mgr == "systemd"
+  when: stat_result.stat.exists == true
 
 - name: enable filebeat
   service:
