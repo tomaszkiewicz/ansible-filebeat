@@ -42,9 +42,14 @@
 - name: flush handlers to prevent start then restart
   meta: flush_handlers
 
-- name: start and enable filebeat
+- name: enable filebeat
+  service:
+    name: filebeat
+    enabled: true
+    daemon_reload: true
+
+- name: start filebeat
   service:
     name: filebeat
     state: started
-    enabled: true
   when: start_services
