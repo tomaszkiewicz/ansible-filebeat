@@ -1,8 +1,8 @@
 ---
-- import_tasks: redhat.yml
+- include: redhat.yml
   when: ansible_os_family == 'RedHat'
 
-- import_tasks: debian.yml
+- include: debian.yml
   when: ansible_os_family == 'Debian'
 
 - name: create filebeat.yml
