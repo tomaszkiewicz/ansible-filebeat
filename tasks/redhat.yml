@@ -17,3 +17,12 @@
     state: present
   notify:
     - restart filebeat
+
+- name: modify filebeat service file to include environment variables
+  lineinfile:
+    path: /usr/lib/systemd/system/filebeat.service
+    regexp: '^EnvironmentFile=/etc/sysconfig/filebeat$'
+    line: "EnvironmentFile=/etc/sysconfig/filebeat"
+    insertafter: '^\[Service\]$'
+  notify:
+    - restart filebeat
