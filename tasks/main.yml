@@ -47,3 +47,4 @@
     name: filebeat
     state: started
     enabled: true
+  when: start_services
