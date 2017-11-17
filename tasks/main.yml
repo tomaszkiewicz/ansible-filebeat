@@ -42,18 +42,14 @@
 - name: flush handlers to prevent start then restart
   meta: flush_handlers
 
-- name: enable filebeat (systemd)
-  systemd:
-    name: filebeat
-    enabled: true
-    daemon_reload: true
+- name: reload systemd daemon
+  shell: "systemctl daemon-reload"
   when: ansible_service_mgr == "systemd"
 
-- name: enable filebeat (other init)
+- name: enable filebeat
   service:
     name: filebeat
     enabled: true
-  when: ansible_service_mgr != "systemd"
 
 - name: start filebeat
   service:
